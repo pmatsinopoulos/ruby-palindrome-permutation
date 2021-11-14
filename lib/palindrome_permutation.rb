@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-require_relative './string_permutations'
-
 def palindrome?(str)
   str.reverse == str
 end
 
-def palindrome_permutation?(str)
-  !string_permutations(str).lazy.find { |perm| palindrome?(perm) }.nil?
+def palindrome_permutation?(str) # really slow
+  str.split('').permutation do |perm|
+    return true if palindrome?(perm)
+  end
+  false
 end
